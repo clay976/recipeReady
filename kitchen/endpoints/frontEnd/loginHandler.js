@@ -1,7 +1,6 @@
-var querystring   = require('querystring')
-var databaseKitchenValidate  = require ('../database/kitchen/validate')
-var databaseKitchenCreate  = require ('../database/kitchen/create')
-var databaseKitchenSave  = require ('../database/kitchen/save')
+var databaseKitchenValidate = require ('../../../database/kitchen/validate')
+var databaseKitchenCreate   = require ('../../../database/kitchen/create')
+var databaseKitchenSave     = require ('../../../database/kitchen/save')
 
 module.exports = function LoginHandler (req, res){
   return new Promise (function (fulfill, reject){

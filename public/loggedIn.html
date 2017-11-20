@@ -70,8 +70,8 @@
 
   <div class="w3-third w3-container">
     <h4 class="w3-xlarge w3-center" >You Could Make</h4>
-    <div id="allGuests"></div>
-    <button type="button" class="w3-input" onclick="getAll2 (kitchenID)">Update List</button>
+    <button type="button" class="w3-input" onclick="updateCouldMake ()">Update List</button>
+    <div id="couldMake"></div>
   </div>
 </div>
 
@@ -91,7 +91,10 @@ function setIngredients(sensor1, sensor2, sensor3, sensor4) {
   xhttp.send(args);
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("ingredientList").innerHTML = this.responseText;
+      var resp = JSON.parse (this.responseText)
+      console.log (resp)
+      document.getElementById("ingredientList").innerHTML = resp.HTML.ingredients;
+      document.getElementById("canMake").innerHTML = resp.HTML.canMake;
       alert ('Your ingredients have now been set')
     }else if (this.readyState == 4 && this.status != 200){
       alert ('there was an error retrieving your playlists, sorry, ' +this.responseText)
@@ -109,8 +112,8 @@ function updateCanMake () {
   xhttp.send(args);
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      console.log (this.responseText)
-      document.getElementById("canMake").innerHTML = this.responseText;
+      var resp = JSON.parse (this.responseText)
+      document.getElementById("canMake").innerHTML = resp.HTML.canMake;
     }else if (this.readyState == 4 && this.status != 200){
       alert ('there was an error retrieving your playlists, ' +this.responseText)
     }
@@ -123,12 +126,13 @@ function updateCouldMake () {
   var args = JSON.stringify({"kitchenID": kitchenID })
   var xhttp = new XMLHttpRequest();
 
-  xhttp.open("POST", "/", true);
+  xhttp.open("POST", "/kitchen/couldMake", true);
   xhttp.setRequestHeader ("Content-type", "application/json");
   xhttp.send(args);
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("canMake").innerHTML = this.responseText
+      var resp = JSON.parse (this.responseText)
+      document.getElementById("couldMake").innerHTML = resp.HTML.couldMake
     }else if (this.readyState == 4 && this.status != 200){
       alert ('there was an error retrieving your playlists, ' +this.responseText)
     }

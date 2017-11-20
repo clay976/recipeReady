@@ -1,4 +1,6 @@
-var model				= require ('../../database/models')
+var model								= require ('../../../database/models')
+var validateKitchen			= require ('../../../database/kitchen/validate')
+var databaseKitchenSave	= require ('../../../database/kitchen/save')
 /*
 validates the access token that the user has provided from the website
 Our access token will be valid until they remove our access to allow
@@ -14,14 +16,17 @@ module.exports = function update (req, res){
 
 	  var promise = validateKitchen (kitchenID)
 	  promise.then (function (kitchen){
-	  	kitchen.ingredients[sensorToUpdate].avaliable = update
+	  	kitchen.HTML.couldMake = update
+	  	kitchen.sensorIngredients[sensorToUpdate].avaliable = update
 	  	return kitchen
 	  })
-	  .then (function (kitchen){
-  		return databaseSaveKitchen (kitchen)
+  	.then (function (kitchen){
+  		return kitchen.save()
   	})
   	.then (function (kitchen){
-  		fulfill (kitchen)
+  		console.log ('updating')
+  		console.log (kitchen.sensorIngredients)
+  		res.status(200).send (kitchen)
   	})
 	  .catch (function(error) {
     	reject (error)

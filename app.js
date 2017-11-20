@@ -9,12 +9,16 @@ var mongoose      = require("mongoose");
 var mongoUrl      = 'mongodb://localhost:27017/recipeReady'
 mongoose.Promise  = global.Promise;
 
-//endpoint handlers
-var kitchenLoginHandler       = require ('./kitchen/loginHandler')
-var kitchenIngredientsAdd     = require ('./kitchen/ingredients/add')
-var kitchenIngredientsSet     = require ('./kitchen/ingredients/set')
-var kitchenIngredientsRemove  = require ('./kitchen/ingredients/remove')
-var kitchenCanMake            = require ('./kitchen/canMake/canMake')
+//
+// frontend endpoints
+var kitchenCanMake            = require ('./kitchen/endpoints/frontEnd/canMake')
+var kitchenCouldMake          = require ('./kitchen/endpoints/frontEnd/couldMake')
+var kitchenLoginHandler       = require ('./kitchen/endpoints/frontEnd/loginHandler')
+var kitchenIngredientsAdd     = require ('./kitchen/endpoints/frontEnd/add')
+var kitchenIngredientsSet     = require ('./kitchen/endpoints/frontEnd/set')
+//var kitchenIngredientsRemove  = require ('./kitchen/endpoints/frontEnd/remove')
+// Sensor endpoints
+var kitchenSensorsUpdate      = require ('./kitchen/endpoints/IoT/update')
 
 //app declaration and uses
 var app = express()
@@ -28,6 +32,10 @@ var db = mongoose.connect(mongoUrl, {
 db.then(function(db) {
   console.log ('starting connection')
   app.use(express.static(__dirname + '/public')).use(cookieParser())
+
+  app.post('/kitchen/sensors/update', function (req, res){
+    kitchenSensorsUpdate (req, res)
+  })
 
   /*
   this will be hit if they are accessing our service from a browser
@@ -54,6 +62,10 @@ db.then(function(db) {
 
   app.post('/kitchen/canMake', function (req, res){
     kitchenCanMake (req, res)
+  })
+
+  app.post('/kitchen/couldMake', function (req, res){
+    kitchenCouldMake (req, res)
   })
 
   app.listen(80)
