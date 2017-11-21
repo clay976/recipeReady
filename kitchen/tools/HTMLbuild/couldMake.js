@@ -2,7 +2,6 @@ module.exports = function couldMake (kitchen){
   var HTML = '<div class="w3-group">'
     for (var index = 3; index < 7; index ++){
       if (kitchen.recipe.results[index].title.trim() != 'Product Equivalents'){
-        console.log (kitchen.recipe.results[index])
         HTML += '<p>Recipe '+(index + 1)+ ': ' +kitchen.recipe.results[index].title.trim()
         HTML += '<br></br>'
         HTML += 'Ingredients: ' +kitchen.recipe.results[index].ingredients+ '</p>'

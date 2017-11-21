@@ -15,7 +15,6 @@ module.exports = function couldMake (req, res){
     })
     .then (function (kitchen){
       console.log ('sending')
-      console.log (kitchen.HTML.couldMake)
       res.status(200).send (kitchen)
     })
     .catch (function (kitchen){

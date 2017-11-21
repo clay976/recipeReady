@@ -33,12 +33,8 @@
           <input class="w3-input" type="text" name="sensor3" id="ingredient3" required>
           <label class="w3-label w3-validate">Ingredient Sensor 3</label>
         </div>
-        <div class="w3-group">
-          <input class="w3-input" type="text" name="sensor4" id="ingredient4" required>
-          <label class="w3-label w3-validate">Ingredient Sensor 4</label>
-        </div>
       </div>
-      <button type="button" class="w3-input" onclick="setIngredients(sensor1.value, sensor2.value, sensor3.value, sensor4.value)">set</button>
+      <button type="button" class="w3-input" onclick="setIngredients(sensor1.value, sensor2.value, sensor3.value)">set</button>
     </form>
 
     <form class="w3-container settingOneDiv" id="mealSettings" action="endpoint" method="POST">
@@ -79,10 +75,10 @@
 <script>
 
 /*____________________________________________Set ingredients____________________________________________*/
-function setIngredients(sensor1, sensor2, sensor3, sensor4) {
+function setIngredients(sensor1, sensor2, sensor3) {
   var args = JSON.stringify({
     "kitchenID" : kitchenID,
-    "ingredient": [sensor1, sensor2, sensor3, sensor4]
+    "ingredient": [sensor1, sensor2, sensor3]
   })
   var xhttp = new XMLHttpRequest();
 
@@ -176,8 +172,7 @@ var params = getHashParams()
 var kitchenID = params.kitchenID,
     ingredient1 = params.i1,
     ingredient2 = params.i2,
-    ingredient3 = params.i3,
-    ingredient4 = params.i4,
+    ingredient3 = params.i3
     error = params.error
 
 if (error) {
@@ -187,7 +182,6 @@ if (error) {
     document.getElementById('ingredient1').value = ingredient1;
     document.getElementById('ingredient2').value = ingredient2;
     document.getElementById('ingredient3').value = ingredient3;
-    document.getElementById('ingredient4').value = ingredient4;
   }
 }
 </script>

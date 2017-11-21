@@ -5,7 +5,6 @@ module.exports = function canMake (kitchen){
   var missing = false
 
     for (var index = 0; index < 4; index ++){
-      console.log (kitchen.recipe.results[index])
       if (kitchen.recipe.results[index].title.trim() != 'Product Equivalents'){
         recipeIngredients = kitchen.recipe.results[index].ingredients.split(", ");
         missingIngredients = []
@@ -14,7 +13,7 @@ module.exports = function canMake (kitchen){
         }
         for (var ing = 0; ing < recipeIngredients.length; ing ++){
 
-          for (var kitchenIng = 0; kitchenIng < 4; kitchenIng ++){
+          for (var kitchenIng = 0; kitchenIng < 3; kitchenIng ++){
             if (kitchen.sensorIngredients[kitchenIng].name == recipeIngredients[ing] && kitchen.sensorIngredients[kitchenIng].avaliable){
               missingIngredients[ing] = false
             }

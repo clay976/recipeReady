@@ -25,7 +25,6 @@ module.exports = function update (req, res){
   	})
   	.then (function (kitchen){
   		console.log ('updating')
-  		console.log (kitchen.sensorIngredients)
   		res.status(200).send (kitchen)
   	})
 	  .catch (function(error) {

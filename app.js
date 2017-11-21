@@ -34,6 +34,7 @@ db.then(function(db) {
   app.use(express.static(__dirname + '/public')).use(cookieParser())
 
   app.post('/kitchen/sensors/update', function (req, res){
+    console.log ('rocky hit endpoint')
     kitchenSensorsUpdate (req, res)
   })
 

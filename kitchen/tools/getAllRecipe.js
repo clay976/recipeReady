@@ -3,7 +3,7 @@ var request       = require('request-promise-native');
 module.exports = function getAllRecipe (kitchen){
 	return new Promise (function (fulfill, reject){
 		var query = 'http://www.recipepuppy.com/api/?i='
-		for (var index = 0; index < 4; index ++){
+		for (var index = 0; index < 3; index ++){
 			if (index < 3) {
 				query = query + kitchen.sensorIngredients[index].name+ ','
 			}else{
