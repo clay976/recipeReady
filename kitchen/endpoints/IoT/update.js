@@ -11,7 +11,7 @@ before knowing.
 module.exports = function update (req, res){
 	return new Promise (function (fulfill, reject){
 		console.log ('logging request')
-		console.log (req)
+		console.log (req.params)
 		var kitchenID				= req.body.kitchenID
 		var sensorToUpdate	= req.body.sensor
 		var update					= req.body.update
