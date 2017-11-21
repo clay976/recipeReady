@@ -10,13 +10,16 @@ before knowing.
 */
 module.exports = function update (req, res){
 	return new Promise (function (fulfill, reject){
+		console.log ('logging request')
+		console.log (req)
 		var kitchenID				= req.body.kitchenID
 		var sensorToUpdate	= req.body.sensor
 		var update					= req.body.update
 
 	  var promise = validateKitchen (kitchenID)
 	  promise.then (function (kitchen){
-	  	kitchen.HTML.couldMake = update
+	  	console.log ('found the kitchen')
+	  	console.log (kitchen)
 	  	kitchen.sensorIngredients[sensorToUpdate].avaliable = update
 	  	return kitchen
 	  })
@@ -25,7 +28,7 @@ module.exports = function update (req, res){
   	})
   	.then (function (kitchen){
   		console.log ('updating')
-  		res.status(200).send (kitchen)
+  		res.status(200).send (kitchen.sensorIngredients)
   	})
 	  .catch (function(error) {
     	reject (error)
